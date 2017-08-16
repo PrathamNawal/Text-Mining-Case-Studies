@@ -32,6 +32,10 @@ writeLines(as.character(dfCorpus[2:13]))
 dfCorpus <- tm_map(dfCorpus,stripWhitespace)
 writeLines(as.character(dfCorpus[2:13]))
 
+#Stemming
+library(SnowballC)
+dfCorpus <- tm_map(dfCorpus,stemDocument)
+
 #Plain Text Document
 dfCorpus <- tm_map(dfCorpus,PlainTextDocument)
 
@@ -70,3 +74,5 @@ dfCorpus = tm_map(dfCorpus, removeWords, c('i','its','it','us','use','used','usi
 library(RSentiment)
 Amazon_Sentiment_Analysis <- calculate_sentiment(df$Comments)
 
+#Saving the Sentiment Analysis Results
+write.csv(Amazon_Sentiment_Analysis,"Amazon_Sentiment_Analysis.R",row.names = FALSE)
